@@ -71,26 +71,29 @@ include('config.php'); //Set up database connection...
       <h3 class="text-center text-white "><b>BILL DETAILS</b></h3>
       <form action="invoice.php" method="post" class="form-inline p-3">
         <input 
-        type="text" 
-        name="product" 
-        id="product" 
-        value=""
-        class="form-control form-control-lg rounded-0" 
-        placeholder="Product" 
-        style="width:100%;">
+              type="text" 
+              name="product" 
+              id="product" 
+              value=""
+              class="form-control form-control-lg rounded-0" 
+              placeholder="Product" 
+              style="width:100%;">
         <div style="padding: 30px;
                     display: flex;
                     justify-content: center;
                     align-items: center;">
-        <input type="submit" class="text-center bg-danger border-danger text-white p-2" value="Submit" style="width:32%;">
+        <input
+              type="submit" 
+              class="text-center bg-danger border-danger text-white p-2" 
+              value="Submit" 
+              style="width:32%;">
         </div>
         
       </form>
       <div class="col-md-5" style="position:relative;margin-top:-100px;width:100%;">
       <div class="list-group" id="show-list">
-        <a href="#" class="list-group-item list-group-item-action border-1 text-center">List1</a>
-        <a href="#" class="list-group-item list-group-item-action border-1 text-center">List1</a>
-        <a href="#" class="list-group-item list-group-item-action border-1 text-center">List1</a>
+        
+        
       </div>
     </div>
     
@@ -99,119 +102,30 @@ include('config.php'); //Set up database connection...
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- View modal  -->
-<?php 
-
-
-/*
-$get_data = "SELECT * FROM admission_data where username='".$_SESSION['username']."'";
-$run_data = mysqli_query($con,$get_data);
-
-$row = mysqli_fetch_array($run_data);
-
-if($row){
-echo "<section style="."background-color: #eee;".">
-<div class="."container py-5".">
-  <div class="."row".">
-    <div class="."col-lg-4".">
-      <div class="."card mb-4".">
-        <div class="."card-body text-center".">
-          <img src="."./images/".$row["image"]."" ."
-            class="."rounded-circle img-fluid" ."style="."width: 150px; height=150px".">
-          <h3 class="."my-3".">".$row["name"]."</h3>
-          <h4 class="."my-3".">NANG".(1000+$row["regno"])."</h4>
-          <p class="."text-muted mb-4".">@".$_SESSION["username"]."</p>
-        </div>
-      </div>
-    </div>
-    <div class="."col-lg-8".">
-      <div class="."card mb-4".">
-        <div class="."card-body".">
-          <div class="."row".">
-            <div class="."col-sm-3".">
-              <p class="."mb-0".">Full Name</p>
-            </div>
-            <div class="."col-sm-9".">
-              <p class="."text-muted mb-0".">".$row["name"]."</p>
-            </div>
-          </div>
-          <hr>
-          <div class="."row".">
-            <div class="."col-sm-3".">
-              <p class="."mb-0".">Email</p>
-            </div>
-            <div class="."col-sm-9".">
-              <p class="."text-muted mb-0".">".$row["email"]."</p>
-            </div>
-          </div>
-          <hr>
-          <div class="."row".">
-            <div class="."col-sm-3".">
-              <p class="."mb-0".">Date Of Birth</p>
-            </div>
-            <div class="."col-sm-9".">
-              <p class="."text-muted mb-0".">".$row["dob"]."</p>
-            </div>
-          </div>
-          <hr>
-          <div class="."row".">
-            <div class="."col-sm-3".">
-              <p class="."mb-0".">Phone</p>
-            </div>
-            <div class="."col-sm-9".">
-              <p class="."text-muted mb-0".">".$row["phone"]."</p>
-            </div>
-          </div>
-          <hr>
-          <div class="."row".">
-            <div class="."col-sm-3".">
-              <p class="."mb-0".">Address</p>
-            </div>
-            <div class="."col-sm-9".">
-              <p class="."text-muted mb-0".">".$row["address"]."</p>
-            </div>
-          </div>
-          <hr>
-          <div class="."row".">
-            <div class="."col-sm-3".">
-              <p class="."mb-0".">Nationality</p>
-            </div>
-            <div class="."col-sm-9".">
-              <p class="."text-muted mb-0".">".$row["nationality"]."</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>";
-}
-else{
-    echo "<h1>Welcome ".$_SESSION["username"]."</h1><br>";
-    
-    echo "<marquee><h4>Your'e not registered yet..!<h4></marquee>";
-}
-
-*/
-?>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+      $("#product").keyup(function() {
+        var productName = $(this).val();
+        if (productName!=''){
+          $.ajax({
+            url:'action.php',
+            method:'POST',
+            data : {query:productName},
+            success: function(response){
+              $("#show-list").html(response);
+            }
+          });
+        }
+        else{
+          $("#show-list").html('');
+        }
+      });
+      $(document).on('click','a',function(){
+        $("#product").val($(this).text());
+        $("#show-list").html('');
+      });
+    });
+</script>
 </body>
 </html>
 
