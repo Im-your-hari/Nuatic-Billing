@@ -75,9 +75,9 @@ include('config.php'); //Set up database connection...
               name="product" 
               id="product" 
               value=""
-              class="form-control form-control-lg rounded-0" 
+              class="form-control form-control-lg rounded-0 display-2" 
               placeholder="Product" 
-              style="width:100%;">
+              style="width:100%;font-size:10px;">
         <div style="padding: 30px;
                     display: flex;
                     justify-content: center;
@@ -85,7 +85,7 @@ include('config.php'); //Set up database connection...
         <input
               type="submit" 
               class="text-center bg-danger border-danger text-white p-2" 
-              value="Submit" 
+              value="SUBMIT" 
               style="width:32%;">
         </div>
         
